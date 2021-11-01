@@ -17,27 +17,20 @@ const reducer = (
   state: ProgramState = initialState,
   action: ProgramsAction
 ): ProgramState => {
-  console.log("type list", action.type);
   switch (action.type) {
     case ActionTypePrograms.PROGRAM_LIST_REQUEST: {
-      console.log("PROGRAM_LIST_REQUEST");
       return { loading: true, error: null, data: [] };
     }
+    
     case ActionTypePrograms.PROGRAM_LIST_SUCCESS: {
-      console.log("PROGRAM_LIST_SUCCESS", action.payload);
-
       return { loading: false, error: null, data: action.payload };
     }
 
     case ActionTypePrograms.PROGRAM_LIST_FAIL: {
-      console.log("PROGRAM_LIST_FAIL");
-
       return { loading: false, error: action.payload, data: [] };
     }
 
     case ActionTypePrograms.PROGRAM_DELTE_ITEM: {
-      console.log("PROGRAM_DELTE_ITEM");
-
       return {
         ...state,
         data: state.data.filter((x) => x.id !== action.payload),

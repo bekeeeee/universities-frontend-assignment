@@ -17,12 +17,10 @@ const reducer = (
   state: ProgramDetailsState = initialState,
   action: ProgramDetailsAction
 ): ProgramDetailsState => {
-  console.log("action.type", action.type);
-
   switch (action.type) {
     case ActionTypeProgramDetails.PROGRAM_DETAILS_REQUEST:
-      console.log("PROGRAM_DETAILS_REQUEST");
       return { loading: true, error: null, data: null };
+
     case ActionTypeProgramDetails.PROGRAM_DETAILS_SUCCESS:
       return { loading: false, error: null, data: action.payload };
 

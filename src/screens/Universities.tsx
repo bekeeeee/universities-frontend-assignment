@@ -44,7 +44,7 @@ const Universities = () => {
       ) : (
         <div className="row center">
           <div className="header-form">
-            <h2>My Customers</h2>
+            <h1>All Programs</h1>
             <div className="search-input">
               <input
                 type="text"
@@ -59,65 +59,60 @@ const Universities = () => {
             <button onClick={() => setPopup(true)}>Create Program</button>
           </div>
           <table id="myTable" className={popup ? "blur" : ""}>
-            <tr className="header">
-              <th>ID</th>
-              <th>School</th>
-              <th>Program</th>
-              <th>Location</th>
-              <th>Length</th>
-              <th></th>
-              <th></th>
-            </tr>
+            <thead>
+              <tr className="header">
+                <th>ID</th>
+                <th>School</th>
+                <th>Program</th>
+                <th>Location</th>
+                <th>Length</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+
             {programs &&
               programs.map((program, i) => (
-                <tr key={i}>
-                  <td>{i}</td>
-                  <td>
-                    <p>{program.school}</p>
-                  </td>
-                  <td>
-                    <p>{program.program}</p>
-                  </td>
-                  <td>{program.location}</td>
-                  <td>{program.length}</td>
-                  <td>
-                    <span
-                      className="fas fa-edit"
-                      onClick={() => {
-                        setPopup(true);
-                        setProgramDetails(program.id);
-                        setSchool(program.school);
-                        setProgram(program.program);
-                        setLocation(program.location);
-                        setLength(program.length);
-
-                        console.log("Edit");
-                      }}
-                    ></span>
-                  </td>
-                  <td>
-                    <span
-                      onClick={async () => {
-                        console.log("program == ", program);
-                        await deleteProgramItem(program.id);
-                        await searchedProgrames(search);
-                      }}
-                    >
-                      &times;
-                    </span>
-
-                    {/* <span onClick={() => console.log("delete")}>X</span> */}
-                  </td>
-                </tr>
+                <tbody key={i}>
+                  <tr>
+                    <td>{i}</td>
+                    <td>
+                      <p>{program.school}</p>
+                    </td>
+                    <td>
+                      <p>{program.program}</p>
+                    </td>
+                    <td>{program.location}</td>
+                    <td>{program.length}</td>
+                    <td>
+                      <span
+                        className="fas fa-edit"
+                        onClick={() => {
+                          setPopup(true);
+                          setProgramDetails(program.id);
+                          setSchool(program.school);
+                          setProgram(program.program);
+                          setLocation(program.location);
+                          setLength(program.length);
+                        }}
+                      ></span>
+                    </td>
+                    <td>
+                      <span
+                        onClick={async () => {
+                          await deleteProgramItem(program.id);
+                          await searchedProgrames(search);
+                        }}
+                      >
+                        &times;
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
               ))}
           </table>
           {popup && (
             <div className="popup">
-              {/* {error && <MessageBox variant="danger">{error}</MessageBox>} */}
-              {error && (
-                <div>{error}errrrrrrrrrrrrrrrrrrrrrrr rrrrrrr rrrrrrrrrr</div>
-              )}
-
               <form
                 className="form"
                 onSubmit={async (e) => {
@@ -143,7 +138,6 @@ const Universities = () => {
                   await clearProgramDetail();
                   await searchedProgrames(search);
 
-                  console.log("errorrrrrrrrrrrrrrrrrrr", error);
                   if (!error) setPopup(false);
                 }}
               >

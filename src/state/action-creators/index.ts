@@ -21,7 +21,6 @@ export const deleteProgramItem = (itemId: string) => {
         payload: data.data.id,
       });
     } catch (err: any) {
-      console.log("err delete", err);
       dispatch({
         type: ActionTypePrograms.PROGRAM_DELTE_ITEM_FAIL,
         payload: err.message!,
@@ -40,20 +39,14 @@ export const setProgramDetails = (programId: string) => {
     });
 
     try {
-      // const { data } = await instance.get(`/api/v1/product/${programId}`);
-      // console.log("data", data);
-      console.log("data program deatils");
-
       const data = await getState().programList.data.find(
         (program: Program) => program.id === programId
       );
-      console.log("data program deatils", data);
       dispatch({
         type: ActionTypeProgramDetails.PROGRAM_DETAILS_SUCCESS,
         payload: data!,
       });
     } catch (err: any) {
-      console.log("errrrrrrrrrrr", err);
       dispatch({
         type: ActionTypeProgramDetails.PROGRAM_DETAILS_FAIL,
         payload: err.message,
@@ -70,7 +63,6 @@ export const clearProgramDetail = () => {
         payload: null,
       });
     } catch (err: any) {
-      console.log("err", err);
       dispatch({
         type: ActionTypeProgramDetails.PROGRAM_DETAILS_FAIL,
         payload: err.message,
@@ -91,7 +83,6 @@ export const updateProgram = (
       const { data } = await instance.patch(`/api/v1/program/${programId}`, {
         ...updatedValues,
       });
-      console.log("update program response", data);
       data.data.id = programId;
 
       dispatch({
@@ -99,7 +90,6 @@ export const updateProgram = (
         payload: data.data! as Program,
       });
     } catch (err: any) {
-      console.log("errrrrrrrrrrr", err.response.data.error);
       dispatch({
         type: ActionTypePrograms.PROGRAM_UPDATE_ITEM_FAIL,
         payload: err.response.data.error,
@@ -113,20 +103,16 @@ export const createProgram = (body: Partial<Program>) => {
     withCredentials: true,
   });
   return async (dispatch: Dispatch<ProgramsAction>) => {
-    console.log("create program variables", body);
-
     try {
       const { data } = await instance.post(`/api/v1/program`, {
         ...body,
       });
-      console.log("create program response", data);
 
       dispatch({
         type: ActionTypePrograms.PROGRAM_CREATE_ITEM,
         payload: data.data! as Program,
       });
     } catch (err: any) {
-      console.log("errrrrrrrrrrr", err);
       dispatch({
         type: ActionTypePrograms.PROGRAM_CREATE_ITEM_FAIL,
         payload: err.message,
@@ -140,8 +126,6 @@ export const searchedProgrames = (university: string) => {
     dispatch: Dispatch<ProgramsAction>,
     getState: () => RootState
   ) => {
-    console.log("searched university", university);
-    console.log("all programs", getState().programList.data!);
     try {
       if (!university)
         dispatch({
@@ -162,7 +146,6 @@ export const searchedProgrames = (university: string) => {
           payload: "Not Found",
         });
     } catch (err: any) {
-      console.log("errrrrrrrrrrr", err);
       dispatch({
         type: ActionTypePrograms.PROGRAM_CREATE_ITEM_FAIL,
         payload: err.message,
@@ -182,7 +165,6 @@ export const listPrograms = () => {
 
     try {
       const { data } = await instance.get("/api/v1/program");
-      console.log("data program", data.data);
       dispatch({
         type: ActionTypePrograms.PROGRAM_LIST_SUCCESS,
         payload: data.data,
