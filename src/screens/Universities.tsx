@@ -90,8 +90,8 @@ const Universities = () => {
                   <td>{program.location}</td>
                   <td>{program.length}</td>
                   <td>
-                    <span
-                      className="fas fa-edit"
+                    <button
+                      className="edit-button"
                       onClick={() => {
                         setPopup(true);
                         setProgramDetails(program.id);
@@ -100,7 +100,9 @@ const Universities = () => {
                         setLocation(program.location);
                         setLength(program.length);
                       }}
-                    ></span>
+                    >
+                      edit
+                    </button>
                   </td>
                   <td>
                     <span
