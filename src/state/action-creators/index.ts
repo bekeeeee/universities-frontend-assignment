@@ -164,7 +164,7 @@ export const listPrograms = () => {
     });
 
     try {
-      const { data } = await instance.get("/api/v1/program");
+      const { data } = await instance.get("api/api/v1/program");
       dispatch({
         type: ActionTypePrograms.PROGRAM_LIST_SUCCESS,
         payload: data.data,
