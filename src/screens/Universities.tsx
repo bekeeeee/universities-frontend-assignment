@@ -80,7 +80,7 @@ const Universities = () => {
             programs.map((program, i) => (
               <tbody key={i}>
                 <tr>
-                  <td>{i}</td>
+                  <td>{i < 9 ? `0${i + 1}` : i + 1}</td>
                   <td>
                     <p>{program.school}</p>
                   </td>
