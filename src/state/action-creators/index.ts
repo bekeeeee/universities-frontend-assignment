@@ -172,7 +172,7 @@ export const listPrograms = () => {
     } catch (err: any) {
       dispatch({
         type: ActionTypePrograms.PROGRAM_LIST_FAIL,
-        payload: err.message,
+        payload: err.response.data.error,
       });
     }
   };

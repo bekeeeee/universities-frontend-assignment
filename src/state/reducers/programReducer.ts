@@ -21,7 +21,7 @@ const reducer = (
     case ActionTypePrograms.PROGRAM_LIST_REQUEST: {
       return { loading: true, error: null, data: [] };
     }
-    
+
     case ActionTypePrograms.PROGRAM_LIST_SUCCESS: {
       return { loading: false, error: null, data: action.payload };
     }
@@ -38,9 +38,6 @@ const reducer = (
     }
 
     case ActionTypePrograms.PROGRAM_UPDATE_ITEM: {
-      console.log("PROGRAM_UPDATE_ITEM");
-      console.log("id updated", action.payload.id);
-
       return {
         ...state,
         data: state.data.map((program) =>
@@ -50,8 +47,6 @@ const reducer = (
     }
 
     case ActionTypePrograms.PROGRAM_UPDATE_ITEM_FAIL: {
-      console.log("PROGRAM_CREATE_FAIL");
-
       return { loading: false, error: action.payload, data: [] };
     }
 
@@ -64,8 +59,6 @@ const reducer = (
     }
 
     case ActionTypePrograms.PROGRAM_CREATE_ITEM_FAIL: {
-      console.log("PROGRAM_CREATE_ITEM_FAIL");
-
       return { loading: false, error: action.payload, data: [] };
     }
 
