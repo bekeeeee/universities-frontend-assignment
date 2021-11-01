@@ -1,0 +1,2 @@
+/api/* https://university-apis-mr.herokuapp.com/:splat 200
+/* /index.html 200 

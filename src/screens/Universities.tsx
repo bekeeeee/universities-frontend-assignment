@@ -41,7 +41,6 @@ const Universities = () => {
     fetchData();
   }, []);
 
-
   return (
     <div className="table-search">
       {loading && <LoadingBox></LoadingBox>}
