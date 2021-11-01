@@ -14,7 +14,7 @@ export const deleteProgramItem = (itemId: string) => {
   });
   return async (dispatch: Dispatch<ProgramsAction>) => {
     try {
-      const { data } = await instance.delete(`/api/v1/program/${itemId}`);
+      const { data } = await instance.delete(`api/api/v1/program/${itemId}`);
 
       dispatch({
         type: ActionTypePrograms.PROGRAM_DELTE_ITEM,
@@ -80,7 +80,7 @@ export const updateProgram = (
   });
   return async (dispatch: Dispatch<ProgramsAction>) => {
     try {
-      const { data } = await instance.patch(`/api/v1/program/${programId}`, {
+      const { data } = await instance.patch(`api/api/v1/program/${programId}`, {
         ...updatedValues,
       });
       data.data.id = programId;
@@ -104,7 +104,7 @@ export const createProgram = (body: Partial<Program>) => {
   });
   return async (dispatch: Dispatch<ProgramsAction>) => {
     try {
-      const { data } = await instance.post(`/api/v1/program`, {
+      const { data } = await instance.post(`api/api/v1/program`, {
         ...body,
       });
 
