@@ -5,6 +5,8 @@ import { RootState } from "..";
 import { ProgramsAction } from "../actions/programsAction";
 import { ActionTypePrograms } from "../action-types/programsActionTypes";
 import { Program } from "../state-types/program";
+import { ProgramDetailsAction } from "../actions/programDetailsAction";
+import { ActionTypeProgramDetails } from "../action-types/programDetailsTypes";
 
 export const deleteProgramItem = (itemId: string) => {
   const instance = axios.create({
@@ -23,6 +25,55 @@ export const deleteProgramItem = (itemId: string) => {
       dispatch({
         type: ActionTypePrograms.PROGRAM_DELTE_ITEM_FAIL,
         payload: err.message!,
+      });
+    }
+  };
+};
+
+export const setProgramDetails = (programId: string) => {
+  return async (
+    dispatch: Dispatch<ProgramDetailsAction>,
+    getState: () => RootState
+  ) => {
+    dispatch({
+      type: ActionTypeProgramDetails.PROGRAM_DETAILS_REQUEST,
+    });
+
+    try {
+      // const { data } = await instance.get(`/api/v1/product/${programId}`);
+      // console.log("data", data);
+      console.log("data program deatils");
+
+      const data = await getState().programList.data.find(
+        (program: Program) => program.id === programId
+      );
+      console.log("data program deatils", data);
+      dispatch({
+        type: ActionTypeProgramDetails.PROGRAM_DETAILS_SUCCESS,
+        payload: data!,
+      });
+    } catch (err: any) {
+      console.log("errrrrrrrrrrr", err);
+      dispatch({
+        type: ActionTypeProgramDetails.PROGRAM_DETAILS_FAIL,
+        payload: err.message,
+      });
+    }
+  };
+};
+
+export const clearProgramDetail = () => {
+  return async (dispatch: Dispatch<ProgramDetailsAction>) => {
+    try {
+      dispatch({
+        type: ActionTypeProgramDetails.PROGRAM_DETAILS_CLEAR,
+        payload: null,
+      });
+    } catch (err: any) {
+      console.log("err", err);
+      dispatch({
+        type: ActionTypeProgramDetails.PROGRAM_DETAILS_FAIL,
+        payload: err.message,
       });
     }
   };
@@ -114,6 +165,31 @@ export const searchedProgrames = (university: string) => {
       console.log("errrrrrrrrrrr", err);
       dispatch({
         type: ActionTypePrograms.PROGRAM_CREATE_ITEM_FAIL,
+        payload: err.message,
+      });
+    }
+  };
+};
+
+export const listPrograms = () => {
+  const instance = axios.create({
+    withCredentials: true,
+  });
+  return async (dispatch: Dispatch<ProgramsAction>) => {
+    dispatch({
+      type: ActionTypePrograms.PROGRAM_LIST_REQUEST,
+    });
+
+    try {
+      const { data } = await instance.get("/api/v1/program");
+      console.log("data program", data.data);
+      dispatch({
+        type: ActionTypePrograms.PROGRAM_LIST_SUCCESS,
+        payload: data.data,
+      });
+    } catch (err: any) {
+      dispatch({
+        type: ActionTypePrograms.PROGRAM_LIST_FAIL,
         payload: err.message,
       });
     }
